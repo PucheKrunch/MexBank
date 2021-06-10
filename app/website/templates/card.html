@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Registro de Tarjetas de débito</h1>
+    <br>
+
+    <form method="POST" action="{% url 'card' %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <input type="number" class="form-control" placeholder="ID del Cliente" min="1" name="cliente_id" value ="{{ cliente_id }}">
+        </div>
+        <div class="mb-3">
+            <input type="number" class="form-control" placeholder="Deposito inicial" name="balance" value ="{{ balance }}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+    <br>
+    <h3>Clientes registrados </h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            {% if not item.dt_id %}
+                <h5>ID: {{ item.id }}</h5>
+                <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

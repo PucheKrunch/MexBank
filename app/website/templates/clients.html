@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h3>Clientes registrados</h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            <h4>ID de Cliente: {{ item.id }}</h4>
+            <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+            <p>Sexo: {{ item.sex }}</p>
+            <p>Fecha de nacimiento: {{ item.b_date }}</p>
+            <p>Asesor: {{ item.works_with }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

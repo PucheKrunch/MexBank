@@ -1,0 +1,89 @@
+/*CONSULTAS BASICAS*/
+
+/*Todos los empleados*/
+SELECT *
+FROM website_empleado;
+
+/*Todos los clientes*/
+SELECT *
+FROM website_cliente;
+
+/*Todas las tarjetas de crédito*/
+SELECT *
+FROM website_c_tarjeta;
+
+/*Todas las tarjetas de debito*/
+SELECT *
+FROM website_d_tarjeta;
+
+/*Empleados con nombre que empiece con S*/
+SELECT id,name,l_names
+FROM website_empleado
+WHERE name LIKE "S%" OR
+l_names LIKE "S%";
+
+/*CONSULTAS COMPLEJAS*/
+
+/*Balance de las cuentas de débito después de una compra de 10000*/
+SELECT website_cliente.id,website_cliente.name,website_cliente.l_names,website_d_tarjeta.balance,website_d_tarjeta.balance - 10000 AS "complex"
+FROM website_cliente
+JOIN website_d_tarjeta
+ON website_cliente.dt_id_id = website_d_tarjeta.id;
+
+/*Dinero que devuelve el banco al año (2%) al usar el 10% del crédito de tu tarjeta mensualmente*/
+SELECT website_cliente.id,website_cliente.name,website_cliente.l_names,website_c_tarjeta.credito,(website_c_tarjeta.credito * .10 *12) * .02 AS "complex"
+FROM website_cliente
+JOIN website_c_tarjeta
+ON website_cliente.ct_id_id = website_c_tarjeta.id;
+
+/*Costo mensual del manejo de cuenta (1% + iva)*/
+SELECT website_cliente.id,website_cliente.name,website_cliente.l_names,website_d_tarjeta.balance,(website_d_tarjeta.balance * .01) * 1.16 AS "complex"
+FROM website_cliente
+JOIN website_d_tarjeta
+ON website_cliente.dt_id_id = website_d_tarjeta.id;
+
+/*Cuenta de crédito de un cliente después de una compra de 7500 pesos*/
+SELECT website_cliente.id,website_cliente.name,website_cliente.l_names,website_c_tarjeta.credito,website_c_tarjeta.c_disponible - 7500*1.16 AS "complex"
+FROM website_cliente
+JOIN website_c_tarjeta
+ON website_cliente.ct_id_id = website_c_tarjeta.id;
+
+/*Balance de las cuentas de débito después de un deposito de 3500 pesos*/
+SELECT website_cliente.id,website_cliente.name,website_cliente.l_names,website_d_tarjeta.balance,website_d_tarjeta.balance + 3500 AS "complex"
+FROM website_cliente
+JOIN website_d_tarjeta
+ON website_cliente.dt_id_id = website_d_tarjeta.id;
+
+/*CONSULTAS CON FUNCIONES DE AGREGACIÓN*/
+
+/*Empleado de mayor edad*/
+SELECT id,name,l_names,b_date
+FROM website_empleado
+WHERE b_date = (
+	SELECT MIN(b_date)
+    FROM website_empleado
+);
+
+/*Empleado más joven*/
+SELECT id,name,l_names,b_date
+FROM website_empleado
+WHERE b_date = (
+	SELECT MAX(b_date)
+    FROM website_empleado
+);
+
+/*Promedio de balance en las cuentas de debito*/
+CREATE VIEW avg_dt AS
+SELECT id,AVG(balance) AS "a"
+FROM website_d_tarjeta;
+
+/*Dinero total sumando todas las cuentas de debito*/
+CREATE VIEW sum_dt AS
+SELECT id,SUM(balance) AS "a"
+FROM website_d_tarjeta;
+
+/*Cantidad de empleados por sexo*/
+CREATE VIEW emp_sex AS
+SELECT id,COUNT(id) AS "a", sex
+FROM website_empleado
+GROUP BY sex;

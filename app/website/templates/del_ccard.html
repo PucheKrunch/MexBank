@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h1>Borrar Tarjeta de Crédito</h1>
+    <br>
+
+    <form method="POST" action="{% url 'del_ccard' %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <input id="object_id" type="number" class="form-control" placeholder="ID de la tarjeta" min="1" name="object_id">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Eliminar</button>
+    </form>
+    <br>
+    <h3>Tarjetas de Crédito registradas</h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            <h5>ID: {{ item.id }}</h5>
+            <p>Titular: {{ item.cliente_id }}</p>
+            <p>Numero de tarjeta: {{ item }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

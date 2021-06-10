@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <h3>Tabla de empleados</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Fecha de nacimiento</th>
+                <th scope="col">Superior id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_emp %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>{{ item.sex }}</td>
+                    <td>{{ item.b_date }}</td>
+                    <td>{{ item.superior_id_id }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Tabla de clientes</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Tarjeta de crédito (ID)</th>
+                <th scope="col">Tarjeta de débito (ID)</th>
+                <th scope="col">Asesor (ID)</th>
+                <th scope="col">Fecha de nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_clients %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>{{ item.sex }}</td>
+                    <td>{{ item.ct_id_id }}</td>
+                    <td>{{ item.dt_id_id }}</td>
+                    <td>{{ item.works_with_id }}</td>
+                    <td>{{ item.b_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Tabla de tarjetas de crédito</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Credito</th>
+                <th scope="col">Credito disponible</th>
+                <th scope="col">Saldo</th>
+                <th scope="col">Dia de corte</th>
+                <th scope="col">Válida hasta</th>
+                <th scope="col">Cliente titular (ID)</th>
+                <th scope="col">Número de tarjeta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_ccards %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>${{ item.credito }}</td>
+                    <td>${{ item.c_disponible }}</td>
+                    <td>${{ item.saldo }}</td>
+                    <td>{{ item.dia_corte }}</td>
+                    <td>{{ item.fecha_valida }}</td>
+                    <td>{{ item.cliente_id_id }}</td>
+                    <td>{{ item.num_tarjeta }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Tabla de tarjetas de débito</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Válida hasta</th>
+                <th scope="col">Cliente titular (ID)</th>
+                <th scope="col">Número de tarjeta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_cards %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>${{ item.balance }}</td>
+                    <td>{{ item.fecha_valida }}</td>
+                    <td>{{ item.cliente_id_id }}</td>
+                    <td>{{ item.num_tarjeta }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Empleados cuyo nombre o apellido empieza con una "S"</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in emp_with_s %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+{% endblock %}

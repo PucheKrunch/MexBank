@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <h3>Empleado de mayor edad</h3>
+    {% for item in oldest %}
+        <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+        <p>Fecha de nacimiento: {{ item.b_date }}</p>
+    {% endfor %}
+    <hr>
+
+    <h3>Empleado más joven</h3>
+    {% for item in young %}
+        <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+        <p>Fecha de nacimiento: {{ item.b_date }}</p>
+    {% endfor %}
+    <hr>
+
+    <h3>Promedio de Balance en las cuentas de débito</h3>
+    {% for item in avg_b %}
+        <h5>${{ item.a }}</h5>
+    {% endfor %}
+    <hr>
+
+    <h3>Dinero total en cuentas de débito</h3>
+    {% for item in sum_dt %}
+        <h5>${{ item.a }}</h5>
+    {% endfor %}
+    <hr>
+
+    <h3>Cantidad de empleados por sexo</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Sexo</th>
+                <th scope="col">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in emp_sex %}
+                <tr>
+                    <th scope="row">{{ item.sex }}</th>
+                    <td>{{ item.a }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+
+{% endblock %}

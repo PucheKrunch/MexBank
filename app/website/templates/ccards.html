@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h3>Tarjetas de Crédito registradas</h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            <h4>Numero de tarjeta: {{ item }}</h4>
+            <p>Titular: {{ item.cliente_id }}</p>
+            <p>Crédito total: ${{ item.credito }}</p>
+            <p>Crédito disponible: ${{ item.c_disponible }}</p>
+            <p>Saldo: ${{ item.saldo }}</p>
+            <p>Día de corte: {{ item.dia_corte }}</p>
+            <p>Valida hasta: {{ item.fecha_valida }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

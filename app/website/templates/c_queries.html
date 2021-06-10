@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <h3>Balance de las cuentas de débito después de una compra de $10,000</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Balance (Antes de la compra)</th>
+                <th scope="col">Balance (Despues de la compra)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in purchase_10k %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>${{ item.balance }}</td>
+                    <td>${{ item.complex }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Anualidad del 2% de la tarjeta de crédito (Usando el 10% del crédito total)</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Credito</th>
+                <th scope="col">Anualidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in c_anual %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>${{ item.credito }}</td>
+                    <td>${{ item.complex }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Costo del manejo de cuenta mensual (1% + I.V.A.)</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Mensualidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in c_mensual %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>${{ item.balance }}</td>
+                    <td>${{ item.complex }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Cuentas de crédito despues de una compra de $7500 + I.V.A.</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Crédito</th>
+                <th scope="col">Crédito disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in c_card_7k %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>${{ item.credito }}</td>
+                    <td>${{ item.complex }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Cuentas de débito despues de recibir un deposito de $3500</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Balance (Antes del deposito)</th>
+                <th scope="col">Balance (Despues del deposito)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in dep_3k %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.l_names }}</td>
+                    <td>${{ item.balance }}</td>
+                    <td>${{ item.complex }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+{% endblock %}

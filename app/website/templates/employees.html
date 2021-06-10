@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h3>Empleados registrados</h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            {% if item.id == 14 %}
+                <h4>Cargo: Gerente</h4>
+                <p>ID del Gerente: {{ item.id }}</p>
+                <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+                <p>Sexo: {{ item.sex }}</p>
+                <p>Fecha de nacimiento: {{ item.b_date }}</p>
+                <hr>
+            {% endif %}
+        {% endfor %}
+        {% for item in all %}
+            {% if item.id != 14 %}
+                <h4>Cargo: Asesor</h4>
+                <p>ID de empleado: {{ item.id }}</p>
+                <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+                <p>Sexo: {{ item.sex }}</p>
+                <p>Fecha de nacimiento: {{ item.b_date }}</p>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

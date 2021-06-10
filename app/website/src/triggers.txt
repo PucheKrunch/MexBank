@@ -1,0 +1,44 @@
+Triggers usados en el pryecto
+
+
+DELIMITER $$
+
+/*Trigger para asignar una tarjeta de débito 
+a su respectivo cliente*/
+CREATE TRIGGER link_dc
+AFTER INSERT ON website_d_tarjeta
+FOR EACH ROW
+BEGIN
+SET SQL_SAFE_UPDATES = 0;
+UPDATE website_cliente,website_d_tarjeta
+SET website_cliente.dt_id_id = website_d_tarjeta.id
+WHERE website_cliente.id = website_d_tarjeta.cliente_id_id;
+SET SQL_SAFE_UPDATES = 1;
+END; $$
+
+/*Trigger para asignar una tarjeta de débito 
+a su respectivo cliente*/
+CREATE TRIGGER link_cc
+AFTER INSERT ON website_c_tarjeta
+FOR EACH ROW
+BEGIN
+SET SQL_SAFE_UPDATES = 0;
+UPDATE website_cliente,website_c_tarjeta
+SET website_cliente.ct_id_id = website_c_tarjeta.id
+WHERE website_cliente.id = website_c_tarjeta.cliente_id_id;
+SET SQL_SAFE_UPDATES = 1;
+END; $$
+
+/*Trigger para asignar los empleados sin asesor al
+Gerente (En caso de que se haya
+eliminado su asesor de la tabla 'empleados')*/
+CREATE TRIGGER del_emp
+AFTER DELETE ON website_empleado
+FOR EACH ROW
+BEGIN
+SET SQL_SAFE_UPDATES=0;
+UPDATE website_cliente
+SET works_with_id = 14
+WHERE works_with_id IS NULL;
+SET SQL_SAFE_UPDATES=1;
+END; $$
