@@ -4,6 +4,7 @@ from .forms import *
 from django.contrib import messages
 from random import randint
 from datetime import date
+import os
 
 # Create your views here.
 
@@ -426,3 +427,8 @@ def up_ccard(request):
 
     else:
         return render(request,'up_ccard.html',{'all':all_cards})
+
+def backup(request):
+    os.popen("mysqldump -h127.0.0.1 -uroot -padmin > backup.sql")
+    messages.success(request,"Base de datos respaldada")
+    return render(request,'home.html',{})

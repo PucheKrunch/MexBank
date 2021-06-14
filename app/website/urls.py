@@ -22,4 +22,5 @@ urlpatterns = [
     path('up_client',views.up_client,name="up_client"),
     path('up_card',views.up_card,name="up_card"),
     path('up_ccard',views.up_ccard,name="up_ccard"),
+    path('backup',views.backup,name="backup"),
 ] 
