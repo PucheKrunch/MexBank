@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h1>Modificación de Empleado</h1>
+    <br>
+
+    <form method="POST" action="{% url 'up_employee' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="ID del empleado a modificar" name="object_id" value ="{{ object_id }}">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Nombre" name="name" value ="{{ name }}">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Apellido(s)" name="l_names" value ="{{ l_names }}">
+        </div>
+        <div class="mb-3">
+            <input type="number" class="form-control" placeholder="ID del superior (En blanco para gerente)" min="1" name="superior_id" value ="{{ superior_id }}">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Sexo (H-M-O)" maxlength="1" name="sex" value ="{{ sex }}">
+        </div>
+        <div class="mb-3">
+            <input type="date" class="form-control" placeholder="Fecha de nacimiento" maxlength="1" name="b_date" value ="{{ b_date }}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Modificar</button>
+    </form>
+    <br>
+    <h3>Empleados registrados</h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            {% if item.id == 14 %}
+                <h4>Cargo: Gerente</h4>
+                <p>ID del Gerente: {{ item.id }}</p>
+                <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+                <p>Sexo: {{ item.sex }}</p>
+                <p>Fecha de nacimiento: {{ item.b_date }}</p>
+                <hr>
+            {% endif %}
+        {% endfor %}
+        {% for item in all %}
+            {% if item.id != 14 %}
+                <h4>Cargo: Asesor</h4>
+                <p>ID de empleado: {{ item.id }}</p>
+                <p>Nombre: {{ item.name }} {{ item.l_names }}</p>
+                <p>Sexo: {{ item.sex }}</p>
+                <p>Fecha de nacimiento: {{ item.b_date }}</p>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

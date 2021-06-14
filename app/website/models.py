@@ -40,7 +40,7 @@ class C_tarjeta(models.Model):
     saldo = models.FloatField(default=0,null=True,blank=True)
     dia_corte = models.IntegerField(null=True,blank=True)
     fecha_valida = models.DateField(null=True,blank=True)
-    cliente_id = models.ForeignKey("Cliente",on_delete=models.CASCADE,null=True)
+    cliente_id = models.ForeignKey("Cliente",on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         number = str(self.num_tarjeta)
@@ -50,7 +50,7 @@ class D_tarjeta(models.Model):
     num_tarjeta = models.CharField(max_length=16,null=True,blank=True)
     balance = models.FloatField()
     fecha_valida = models.DateField(null=True,blank=True)
-    cliente_id = models.ForeignKey("Cliente",on_delete=models.CASCADE,null=True)
+    cliente_id = models.ForeignKey("Cliente",on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         number = str(self.num_tarjeta)

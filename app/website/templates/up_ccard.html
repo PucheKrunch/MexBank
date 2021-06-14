@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Modificación de Tarjetas crédito</h1>
+    <br>
+
+    <form method="POST" action="{% url 'up_ccard' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="ID de la tarjeta a modificar" name="object_id" value ="{{ object_id }}">
+        </div>
+        <div class="mb-3">
+            <input type="number" class="form-control" placeholder="Crédito total" name="credito" value ="{{ credito }}">
+        </div>
+        <div class="mb-3">
+            <input type="number" class="form-control" placeholder="Crédito disponible" name="c_disponible" value ="{{ c_disponible }}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Modificar</button>
+    </form>
+    <br>
+    <h3>Tarjetas de Crédito registradas</h3>
+    <hr>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {% for item in all %}
+            <h4>ID: {{ item.id }}</h4>
+            <p>Numero de tarjeta: {{ item }}</p>
+            <p>Titular: {{ item.cliente_id }}</p>
+            <p>Crédito total: ${{ item.credito }}</p>
+            <p>Crédito disponible: ${{ item.c_disponible }}</p>
+            <p>Saldo: ${{ item.saldo }}</p>
+            <p>Día de corte: {{ item.dia_corte }}</p>
+            <p>Valida hasta: {{ item.fecha_valida }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

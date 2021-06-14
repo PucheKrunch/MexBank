@@ -329,3 +329,100 @@ def a_queries(request):
         'emp_sex':emp_sex,
         'sum_dt':sum_dt,
     })
+
+def up_employee(request):
+    all_employees = Empleado.objects.all
+    if request.method == "POST":
+        form = up_employeeForm(request.POST or None)
+        if form.is_valid():
+            object_id = form.cleaned_data['object_id']
+            name = form.cleaned_data['name']
+            l_names = form.cleaned_data['l_names']
+            superior_id = form.cleaned_data['superior_id']
+            sex = form.cleaned_data['sex']
+            b_date = form.cleaned_data['b_date']
+            try:
+                Empleado.objects.filter(pk=object_id).update(name=name,l_names=l_names,superior_id=superior_id,sex=sex,b_date=b_date)
+            except:
+                messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+                return render(request,'up_employee.html',{'all':all_employees})
+        else:
+            messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+            return render(request,'up_employee.html',{'all':all_employees})
+        messages.success(request,"Empleado modificado exitosamente")
+        return redirect('employees')
+
+    else:
+        return render(request,'up_employee.html',{'all':all_employees})
+
+def up_client(request):
+    all_employees = Empleado.objects.all
+    all_clients = Cliente.objects.all
+    if request.method == "POST":
+        form = up_clientForm(request.POST or None)
+        if form.is_valid():
+            object_id = form.cleaned_data['object_id']
+            name = form.cleaned_data['name']
+            l_names = form.cleaned_data['l_names']
+            works_with = form.cleaned_data['works_with']
+            sex = form.cleaned_data['sex']
+            b_date = form.cleaned_data['b_date']
+            try:
+                Cliente.objects.filter(pk=object_id).update(name=name,l_names=l_names,works_with=works_with,sex=sex,b_date=b_date)
+            except:
+                messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+                return render(request,'up_client.html',{'all_c':all_clients,'all_e':all_employees})
+        else:
+            messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+            return render(request,'up_client.html',{'all_c':all_clients,'all_e':all_employees})
+        messages.success(request,"Cliente modificado exitosamente")
+        return redirect('clients')
+
+    else:
+        return render(request,'up_client.html',{'all_c':all_clients,'all_e':all_employees})
+
+def up_card(request):
+    all_cards = D_tarjeta.objects.all
+    if request.method == "POST":
+        form = up_cardForm(request.POST or None)
+        if form.is_valid():
+            object_id = form.cleaned_data['object_id']
+            balance = form.cleaned_data['balance']
+            try:
+                D_tarjeta.objects.filter(pk=object_id).update(balance=balance)
+            except:
+                messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+                return render(request,'up_card.html',{'all':all_cards})
+        else:
+            messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+            return render(request,'up_card.html',{'all':all_cards})
+        messages.success(request,"Tarjeta de Débito modificada exitosamente")
+        return redirect('cards')
+
+    else:
+        return render(request,'up_card.html',{'all':all_cards})
+
+def up_ccard(request):
+    all_cards = C_tarjeta.objects.all
+    if request.method == "POST":
+        form = up_ccardForm(request.POST or None)
+        if form.is_valid():
+            object_id = form.cleaned_data['object_id']
+            credito = form.cleaned_data['credito']
+            c_disponible = form.cleaned_data['c_disponible']
+            print(credito,type(credito))
+            print(c_disponible,type(c_disponible))
+            saldo = credito - c_disponible
+            try:
+                C_tarjeta.objects.filter(pk=object_id).update(credito=credito,saldo=saldo,c_disponible=c_disponible)
+            except:
+                messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+                return render(request,'up_ccard.html',{'all':all_cards})
+        else:
+            messages.success(request,"Ocurrió un error en el formulario! Por favor, intenta de nuevo...")
+            return render(request,'up_ccard.html',{'all':all_cards})
+        messages.success(request,"Tarjeta de Crédito modificada exitosamente")
+        return redirect('ccards')
+
+    else:
+        return render(request,'up_ccard.html',{'all':all_cards})

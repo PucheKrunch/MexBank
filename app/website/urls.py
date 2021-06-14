@@ -18,4 +18,8 @@ urlpatterns = [
     path('s_queries',views.s_queries,name="s_queries"),
     path('c_queries',views.c_queries,name="c_queries"),
     path('a_queries',views.a_queries,name="a_queries"),
+    path('up_employee',views.up_employee,name="up_employee"),
+    path('up_client',views.up_client,name="up_client"),
+    path('up_card',views.up_card,name="up_card"),
+    path('up_ccard',views.up_ccard,name="up_ccard"),
 ] 
