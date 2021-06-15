@@ -16,7 +16,7 @@ WHERE website_cliente.id = website_d_tarjeta.cliente_id_id;
 SET SQL_SAFE_UPDATES = 1;
 END; $$
 
-/*Trigger para asignar una tarjeta de débito 
+/*Trigger para asignar una tarjeta de crédito 
 a su respectivo cliente*/
 CREATE TRIGGER link_cc
 AFTER INSERT ON website_c_tarjeta
